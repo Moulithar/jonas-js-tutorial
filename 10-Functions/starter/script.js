@@ -36,15 +36,15 @@ const button = document.createElement("button")
 document.body.appendChild(textArea);
 document.body.appendChild(button);
 
-button.innerHTML = 'Sumbit';
+button.textContent = 'Sumbit';
 
 const handleClick =()=>{
   const value = textArea.value;
   const formattedArray = value.replaceAll("// ", "").split("\n");
 
   for(const [index,row] of formattedArray.entries()){
-    const [firstWord, lastWord] = row.split("_");
-    const camelCase = firstWord.toLowerCase().trim() + lastWord[0].toUpperCase()+ lastWord.slice(1).toLowerCase();
+    const [firstWord, lastWord] = row.toLowerCase().trim().split("_");
+    const camelCase = firstWord + lastWord.replace(lastWord[0], lastWord[0].toUpperCase());
     console.log(camelCase.padEnd(20," ")+"#".repeat(index+1))
 
   }
