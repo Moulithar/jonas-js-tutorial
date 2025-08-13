@@ -27,31 +27,28 @@ console.log(maskedNumber);
 // underscore_case
 //  first_name
 // some_var
-//  calculate_AGE
+//   calculate_AGE
 // delayed_departure
 
-document.body.append(document.createElement('textarea'));
-document.body.append(document.createElement('button'));
-const btnElement = document.querySelector('button');
-btnElement.innerHTML = 'Submit';
-btnElement.addEventListener('click', () => {
-  const textData = document.querySelector('textarea').value;
-  const replaced = textData.replaceAll('// ', '');
-  const textArray = replaced.split('\n');
-  const camelCaseArray = [];
-  for (const text of textArray) {
-    let splittedArray = text.split('_');
+const textArea = document.createElement("textarea");
+const button = document.createElement("button")
 
+document.body.appendChild(textArea);
+document.body.appendChild(button);
 
-    let firstWord = splittedArray[0];
+button.innerHTML = 'Sumbit';
 
-    let secondWord =
-      splittedArray[1][0].toUpperCase() + splittedArray[1].slice(1).toLowerCase();
-    let camelCase = (firstWord + secondWord).trim();
-    camelCaseArray.push(camelCase);
+const handleClick =()=>{
+  const value = textArea.value;
+  const formattedArray = value.replaceAll("// ", "").split("\n");
+
+  for(const [index,row] of formattedArray.entries()){
+    const [firstWord, lastWord] = row.split("_");
+    const camelCase = firstWord.toLowerCase().trim() + lastWord[0].toUpperCase()+ lastWord.slice(1).toLowerCase();
+    console.log(camelCase.padEnd(20," ")+"#".repeat(index+1))
+
   }
 
-  for(const [index,text] of camelCaseArray.entries()){
-    console.log(`${text.padEnd(20, " ")} ${"x".repeat(index + 1)}`);
-  }
-});
+}
+
+button.addEventListener("click", handleClick)
