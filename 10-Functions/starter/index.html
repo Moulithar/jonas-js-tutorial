@@ -10,7 +10,7 @@
         height: 100vh;
         display: flex;
         align-items: center;
-        background: linear-gradient(to top left, #e7e7e7, #e7e7e7);
+        background: linear-gradient(to top left, #808080, #000000);
       }
       h1 {
         font-family: sans-serif;
@@ -34,12 +34,49 @@
       .poll {
         right: 2rem;
       }
+      .container{
+        background-color: rgb(164, 12, 174);
+        padding-right: 4px ;
+
+      }
+      .polygon-div {
+        position: relative;
+        background-color: #ffffff;
+        padding: 20px;
+        height: 200px;
+        font-size: 64px;
+      }
+      .polygon-div::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 10%;
+        height: 10%;
+        background: rgb(164, 12, 174);
+        clip-path: polygon(0 0, 0% 100%, 100% 0);
+      }
+      .polygon-div::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 10%;
+        height: 10%;
+        background: rgb(164, 12, 174);
+        clip-path: polygon(0 0, 0% 100%, 100% 100%);
+      }
     </style>
   </head>
   <body>
     <h1>A Closer Look at Functions</h1>
-    <!-- <button class="buy">Buy new plane !!!!! 🛩</button> -->
-    <!-- <button class="poll">Answer poll ⁉️</button> -->
+    <button class="buy">Buy new plane !!!!! 🛩</button> 
+    <button class="poll">Answer poll ⁉️</button>
+     <!-- <div class="container">
+      <div class="polygon-div">
+        <div>hi, hello wold</div>
+      </div>
+     </div> -->
     <script src="script.js"></script>
   </body>
 </html>
