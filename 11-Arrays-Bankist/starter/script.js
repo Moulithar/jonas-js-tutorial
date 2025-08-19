@@ -71,6 +71,63 @@ const currencies = new Map([
   ['GBP', 'Pound sterling'],
 ]);
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const movements = [-200, -450, -400, -3000, -650, -130, -70, -1300];
 
 /////////////////////////////////////////////////
+
+const withdrawls = movements
+  .filter(mov => mov < 0)
+  .map((data, i) => `Withdrawl number ${i + 1}: ${Math.abs(data)}`);
+console.log(withdrawls);
+
+const maximun = movements.reduce((acc, curr) => {
+  if (acc > curr) {
+    return acc;
+  } else {
+    return curr;
+  }
+}, movements.at(0));
+console.log(maximun);
+
+const groupByActivity = Object.groupBy(accounts, account => {
+  const movements = account.movements.length;
+
+  if (movements >= 8) {
+    return 'very active';
+  }
+  if (movements >= 4) {
+    return 'active';
+  }
+  if (movements >= 1) {
+    return 'moderate';
+  }
+  return 'inactive';
+});
+
+console.log(groupByActivity);
+
+const total = accounts
+  .flatMap(acc => acc.movements)
+  .filter(mov => mov > 0)
+  .reduce((acc, curr) => acc + curr, 0);
+
+console.log(total);
+
+const above1000 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((acc, curr) => curr > 1000 ? ++acc : acc, 0);
+
+  console.log(above1000)
+
+
+  const convertTitleCase = (title) => {
+    const exceptions = ["a", "an", "and", "the", "but", "or", "on", "in",  "is", "with", ];
+    
+    const titleCase = title.toLowerCase().split(" ").map((word,index)=> (exceptions.includes(word) && index != 0 )  ? word : word[0].toUpperCase() + word.slice(1)).join(" ")
+
+    return titleCase
+  }
+
+  console.log(convertTitleCase("this is a nice title"))
+  console.log(convertTitleCase("this is a LONG title but not too long"))
+  console.log(convertTitleCase("and here is an another title with an EXAMPLE"))
