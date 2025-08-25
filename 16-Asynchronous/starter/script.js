@@ -297,7 +297,7 @@ getCoun(-33.933, 18.474);
 // printHelloDeclaration();
 // const printHelloExpression = function(){
 //   console.log("hello expression")
-// }   
+// }
 // printHelloExpression();
 // printHelloExpressionArrow();
 
@@ -305,12 +305,9 @@ getCoun(-33.933, 18.474);
 //   console.log("hello expression")
 // }
 
-
-
 // function printHelloDeclaration(){
 //   console.log("hello desclaration")
 // }
-
 
 // function sayName(intial = "", secondInitial = ""){
 //   console.log(`${this.name} ${intial}${secondInitial}`)
@@ -331,3 +328,10 @@ getCoun(-33.933, 18.474);
 
 // const sayNameMouli = sayName.bind(mouli, "B", "C")
 // sayNameMouli()
+
+console.log('1');
+setTimeout(() => console.log('4'), 0);
+Promise.resolve('3').then(data => {
+  return Promise.resolve('5').then(res => setTimeout(() => console.log(data + res), 0));
+});
+console.log('2');
