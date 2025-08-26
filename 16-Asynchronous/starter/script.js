@@ -274,7 +274,7 @@ const getCoun = (lat = '52.509', lon = '13.381') => {
 
 // getCoun(52.509, 13.381);
 // getCoun(19.037, 72.873);
-getCoun(-33.933, 18.474);
+// getCoun(-33.933, 18.474);
 
 // const a = 'jonas';
 // first();
@@ -329,9 +329,114 @@ getCoun(-33.933, 18.474);
 // const sayNameMouli = sayName.bind(mouli, "B", "C")
 // sayNameMouli()
 
-console.log('1');
-setTimeout(() => console.log('4'), 0);
-Promise.resolve('3').then(data => {
-  return Promise.resolve('5').then(res => setTimeout(() => console.log(data + res), 0));
+// console.log('1');
+// setTimeout(() => console.log('4'), 0);
+// Promise.resolve('3').then(data => {
+//   return Promise.resolve('5').then(res => setTimeout(() => console.log(data + res), 0));
+// });
+// console.log('2');
+
+// const lotteryResults = new Promise((resolve, reject) => {
+//   console.log("Lottery process happening")
+//   setTimeout(() => {
+//     if (Math.random() >= 0.5) {
+//       resolve('YOU WIN!!');
+//     } else {
+//       reject(new Error("YOU LOSE!!"));
+//     }
+//   }, 3000);
+// });
+
+// lotteryResults.then(res => console.log(res)).catch(err => console.error(err));
+
+const wait = seconds => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve();
+    }, seconds * 1000);
+  });
+};
+
+// wait(3)
+//   .then(() => {
+//     console.log(`waited 3 second`);
+//     return wait(1);
+//   })
+//   .then(() => {
+//     console.log(`waited 4 second`);
+//     return wait(1);
+//   })
+//   .then(() => {
+//     console.log(`waited 5 second`);
+//     return wait(1);
+//   })
+//   .then(() => {
+//     console.log(`waited 6 second`);
+//     return wait(1);
+//   });
+
+/* 
+Build the image loading functionality that I just showed you on the screen.
+
+Tasks are not super-descriptive this time, so that you can figure out some stuff on your own. Pretend you're working on your own 😉
+
+PART 1
+1. Create a function 'createImage' which receives imgPath as an input. This function returns a promise which creates a new image (use document.createElement('img')) and sets the .src attribute to the provided image path. When the image is done loading, append it to the DOM element with the 'images' class, and resolve the promise. The fulfilled value should be the image element itself. In case there is an error loading the image ('error' event), reject the promise.
+
+If this part is too tricky for you, just watch the first part of the solution.
+
+PART 2
+2. Comsume the promise using .then and also add an error handler;
+3. After the image has loaded, pause execution for 2 seconds using the wait function we created earlier;
+4. After the 2 seconds have passed, hide the current image (set display to 'none'), and load a second image (HINT: Use the image element returned by the createImage promise to hide the current image. You will need a global variable for that 😉);
+5. After the second image has loaded, pause execution for 2 seconds again;
+6. After the 2 seconds have passed, hide the current image.
+
+TEST DATA: Images in the img folder. Test the error handler by passing a wrong image path. Set the network speed to 'Fast 3G' in the dev tools Network tab, otherwise images load too fast.
+
+GOOD LUCK 😀
+*/
+
+const imageLoader = document.getElementById('load-image');
+const imageElement = document.createElement('img');
+
+const images = document.querySelector('.images');
+const createImage = imgPath => {
+  imageElement.src = imgPath;
+  return new Promise((res, rej) => {
+    imageElement.addEventListener('load', () => {
+      images.style.display = 'block';
+      images.appendChild(imageElement);
+      res(imageElement);
+    });
+    imageElement.addEventListener('error', () => {
+      rej(new Error('Failed to load image'));
+    });
+  });
+};
+
+imageLoader.addEventListener('click', () => {
+  createImage('./img/img-1.jpg')
+    .then(res => {
+      return wait(2);
+    })
+    .then(() => {
+      images.style.display = 'none';
+      return createImage('./img/img-2.jpg');
+    })
+    .then(res => {
+      console.log(res);
+      return wait(2);
+    })
+    .then(() => {
+      images.style.display = 'none';
+      return createImage('./img/img-3.jpg');
+    })
+    .then(res => {
+      console.log(res);
+      return wait(2);
+    })
+    .then(() => {
+      images.style.display = 'none';
+    });
 });
-console.log('2');
