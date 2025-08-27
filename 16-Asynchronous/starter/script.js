@@ -440,3 +440,41 @@ imageLoader.addEventListener('click', () => {
       images.style.display = 'none';
     });
 });
+
+// const nums = [2, 7, 13, 0, 14, 22, 6];
+// const target = 84;
+// function twoSum(nums, target) {
+//   const hashMap = {};
+//   for (let i = 0; i < nums.length; i++) {
+//     if (hashMap[target - nums[i]] !== undefined) {
+//       return [hashMap[target - nums[i]], i];
+//     } 
+//       hashMap[nums[i]] = i;
+    
+//   }
+//   return "No pairs found"
+// }
+
+// console.log(twoSum(nums, target));
+
+
+// const nums: number[] = [2, 7, 13, 0, 14, 22, 6];
+// const target: number = 84;
+
+// function twoSum(nums: number[], target: number): number[] {
+//   const map: Record<number, number> = {}; // key = value from nums, value = index
+
+//   for (let i = 0; i < nums.length; i++) {
+//     const complement: number = target - nums[i];
+
+//     if (map[complement] !== undefined) {
+//       return [map[complement], i];
+//     }
+
+//     map[nums[i]] = i;
+//   }
+
+//   return []; // consistent return type
+// }
+
+// console.log(twoSum(nums, target)); // []
