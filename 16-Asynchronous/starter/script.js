@@ -176,6 +176,7 @@ const showHtml = (data, className = '') => {
   const { name, population, flags, currencies, region, languages } = className
     ? data
     : data[0];
+    // console.log(data)
   const html = `
     <article class="country ${className}">
       <img class="country__img" src="${flags.png}" />
@@ -448,15 +449,14 @@ imageLoader.addEventListener('click', () => {
 //   for (let i = 0; i < nums.length; i++) {
 //     if (hashMap[target - nums[i]] !== undefined) {
 //       return [hashMap[target - nums[i]], i];
-//     } 
+//     }
 //       hashMap[nums[i]] = i;
-    
+
 //   }
 //   return "No pairs found"
 // }
 
 // console.log(twoSum(nums, target));
-
 
 // const nums: number[] = [2, 7, 13, 0, 14, 22, 6];
 // const target: number = 84;
@@ -478,3 +478,12 @@ imageLoader.addEventListener('click', () => {
 // }
 
 // console.log(twoSum(nums, target)); // []
+
+const getCuntry = async country => {
+  let res = await fetch(`https://restcountries.com/v2/name/${country}`);
+  let data = await res.json();
+  countriesContainer.style.opacity = 1
+  showHtml(data);
+};
+
+getCuntry('portugal');
