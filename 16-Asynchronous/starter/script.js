@@ -480,10 +480,18 @@ imageLoader.addEventListener('click', () => {
 // console.log(twoSum(nums, target)); // []
 
 const getCuntry = async country => {
-  let res = await fetch(`https://restcountries.com/v2/name/${country}`);
-  let data = await res.json();
-  countriesContainer.style.opacity = 1
-  showHtml(data);
-};
+  try{
 
+    let res = await fetch(`https://restcountries.com/v2/names/${country}`);
+    if(!res.ok) throw new Error ("Patti guna")
+    let data = await res.json();
+    countriesContainer.style.opacity = 1
+    showHtml(data);
+  } catch (err){
+    alert(err)
+  }
+}
+
+getCuntry('portugal');
+getCuntry('portugal');
 getCuntry('portugal');
