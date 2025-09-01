@@ -176,7 +176,7 @@ const showHtml = (data, className = '') => {
   const { name, population, flags, currencies, region, languages } = className
     ? data
     : data[0];
-    // console.log(data)
+  // console.log(data)
   const html = `
     <article class="country ${className}">
       <img class="country__img" src="${flags.png}" />
@@ -479,19 +479,49 @@ imageLoader.addEventListener('click', () => {
 
 // console.log(twoSum(nums, target)); // []
 
-const getCuntry = async country => {
-  try{
+// const getCuntry = async country => {
+//   try{
 
-    let res = await fetch(`https://restcountries.com/v2/names/${country}`);
-    if(!res.ok) throw new Error ("Patti guna")
-    let data = await res.json();
-    countriesContainer.style.opacity = 1
-    showHtml(data);
-  } catch (err){
-    alert(err)
+//     let res = await fetch(`https://restcountries.com/v2/name/${country}`);
+//     if(!res.ok) throw new Error ("Patti guna")
+//     let data = await res.json();
+//     countriesContainer.style.opacity = 1
+//     showHtml(data);
+//   } catch (err){
+//     alert(err)
+//   }
+// }
+
+// getCuntry('portugal');
+
+const subArrayGenerator = arr => {
+  let subArrays = [];
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr.length - i; j++) {
+      subArrays.push(arr.slice(j, j + i + 1));
+    }
   }
-}
+  return subArrays;
+};
 
-getCuntry('portugal');
-getCuntry('portugal');
-getCuntry('portugal');
+const array = [-2, 6, 1, -3, 4, -1, 2, 1, -5];
+const array1 = [1, 2, 3, 4];
+const array2 = [-1, -2, -3, -4];
+
+const findHighestContinousTotal = array => {
+  const subArray = subArrayGenerator(array);
+  let max = subArray[0][0];
+  let maxArray = subArray[0];
+  for (let i = 0; i < subArray.length; i++) {
+    const total = subArray[i].reduce((acc, curr) => acc + curr, 0);
+    if (total > max) {
+      max = total;
+      maxArray = subArray[i];
+    }
+  }
+  console.log(maxArray);
+};
+
+findHighestContinousTotal(array);
+findHighestContinousTotal(array1);
+findHighestContinousTotal(array2);
